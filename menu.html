@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню — Кофейня «Ithaca»</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body class="menu-body">
+
+    <div class="topbar">
+        <a href="index.html" class="logo">Ithaca</a>
+        <a href="index.html" class="back">← На главную</a>
+    </div>
+
+    <main class="menu-wrap">
+
+        <!-- Главные вкладки -->
+        <nav class="main-tabs">
+            <button class="main-tab active" data-group="drinks">Напитки</button>
+            <button class="main-tab" data-group="snacks">Снэки</button>
+            <button class="main-tab" data-group="kitchen">Кухня</button>
+        </nav>
+
+        <!-- ===== Напитки ===== -->
+        <div class="group active" id="drinks">
+            <div class="sub-tabs">
+                <button class="sub-tab active" data-target="coffee">Кофе</button>
+                <button class="sub-tab" data-target="cold">Холодные</button>
+                <button class="sub-tab" data-target="tea">Чай</button>
+            </div>
+
+            <ul class="panel multi active" id="coffee">
+    <li class="head">
+        <span></span>
+        <span>0,25 л</span>
+        <span>0,4 л</span>
+        <span>0,5 л</span>
+    </li>
+    <li>
+        <span class="name">Эспрессо</span>
+        <span class="price">800 ₸</span>
+        <span class="price">-</span>
+        <span class="price">-</span>
+    </li>
+    <li>
+        <span class="name">Американо</span>
+        <span class="price">1 000 ₸</span>
+        <span class="price">1 200 ₸</span>
+        <span class="price">1 400 ₸</span>
+    </li>
+    <li>
+        <span class="name">Капучино</span>
+        <span class="price">1 400 ₸</span>
+        <span class="price">1 700 ₸</span>
+        <span class="price">1 900 ₸</span>
+    </li>
+    <li>
+        <span class="name">Латте</span>
+        <span class="price">1 500 ₸</span>
+        <span class="price">1 800 ₸</span>
+        <span class="price">2 000 ₸</span>
+    </li>
+    <li>
+        <span class="name">Флэт уайт</span>
+        <span class="price">1 600 ₸</span>
+        <span class="price">1 900 ₸</span>
+        <span class="price">2 100 ₸</span>
+    </li>
+</ul>
+
+            <ul class="panel multi" id="cold">
+    <li class="head">
+        <span></span>
+        <span>0,25 л</span>
+        <span>0,4 л</span>
+        <span>0,5 л</span>
+    </li>
+    <li>
+        <span class="name">Айс латте</span>
+        <span class="price">1 700 ₸</span>
+        <span class="price">2 000 ₸</span>
+        <span class="price">2 200 ₸</span>
+    </li>
+    <li>
+        <span class="name">Лимонад домашний</span>
+        <span class="price">1 500 ₸</span>
+        <span class="price">1 800 ₸</span>
+        <span class="price">2 000 ₸</span>
+    </li>
+    <li>
+        <span class="name">Смузи ягодный</span>
+        <span class="price">2 000 ₸</span>
+        <span class="price">2 400 ₸</span>
+        <span class="price">2 700 ₸</span>
+    </li>
+    <li>
+        <span class="name">Свежевыжатый сок</span>
+        <span class="price">2 200 ₸</span>
+        <span class="price">2 700 ₸</span>
+        <span class="price">3 000 ₸</span>
+    </li>
+</ul>
+
+            <ul class="panel multi" id="tea">
+    <li class="head">
+        <span></span>
+        <span>0,25 л</span>
+        <span>0,4 л</span>
+        <span>0,5 л</span>
+    </li>
+    <li>
+        <span class="name">Чёрный чай</span>
+        <span class="price">900 ₸</span>
+        <span class="price">1 100 ₸</span>
+        <span class="price">1 300 ₸</span>
+    </li>
+    <li>
+        <span class="name">Зелёный чай</span>
+        <span class="price">900 ₸</span>
+        <span class="price">1 100 ₸</span>
+        <span class="price">1 300 ₸</span>
+    </li>
+    <li>
+        <span class="name">Чай с облепихой</span>
+        <span class="price">1 500 ₸</span>
+        <span class="price">1 800 ₸</span>
+        <span class="price">2 000 ₸</span>
+    </li>
+    <li>
+        <span class="name">Матча латте</span>
+        <span class="price">1 900 ₸</span>
+        <span class="price">2 300 ₸</span>
+        <span class="price">2 600 ₸</span>
+    </li>
+</ul>
+        </div>
+
+        <!-- ===== Снэки ===== -->
+        <div class="group" id="snacks">
+            <div class="sub-tabs">
+                <button class="sub-tab active" data-target="sandwiches">Сэндвичи</button>
+                <button class="sub-tab" data-target="desserts">Десерты</button>
+            </div>
+
+            <ul class="panel active" id="sandwiches">
+    <li>
+        <div class="item">
+            <span class="name">Банми (Bánh Mì), Вьетнам</span>
+            <p class="desc">Хрустящий вьетнамский багет с запечённой свининой (или паштетом), маринованной дайкон-морковью, огурцом, свежей кинзой и острым соусом. Баланс французских традиций и азиатских вкусов.</p>
+        </div>
+        <span class="price">2 600 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Кубано (Cubano), Куба / США</span>
+            <p class="desc">Обжаренный в прессе кубинский хлеб с ветчиной, запечённой свининой, швейцарским сыром, солёными огурчиками и горчицей. Хрустящий снаружи и очень сочный внутри.</p>
+        </div>
+        <span class="price">2 900 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Филадельфия Чизстейк, США</span>
+            <p class="desc">Длинная булочка с тонко нарезанным обжаренным говяжьим стейком, расплавленным сыром (или сырным соусом) и карамелизованным луком.</p>
+        </div>
+        <span class="price">3 200 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Франсезинья (Francesinha), Португалия</span>
+            <p class="desc">Королевский сытный сэндвич из Порту: ветчина, сосиски и стейк под толстым слоем расплавленного сыра, с глазуньей и густым пивным соусом с томатами.</p>
+        </div>
+        <span class="price">3 800 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Кацу Сандо (Katsu Sando), Япония</span>
+            <p class="desc">Пышный белый хлеб сётаку, а между слоями сочная свиная или говяжья котлета в хрустящей панировке панко, смазанная соусом тонкацу.</p>
+        </div>
+        <span class="price">3 400 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Крок-Месье / Крок-Мадам, Франция</span>
+            <p class="desc">Горячий французский сэндвич, запечённый с соусом бешамель, сыром грюйер и ветчиной. «Крок-Мадам» украшается сверху жареным яйцом-глазуньей.</p>
+        </div>
+        <span class="price">2 800 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Лобстер Ролл (Lobster Roll), США</span>
+            <p class="desc">Мягкая слегка поджаренная булочка для хот-дога, щедро наполненная нежным мясом омара с домашним майонезом или растопленным сливочным маслом и зеленью.</p>
+        </div>
+        <span class="price">6 500 ₸</span>
+    </li>
+</ul>
+
+            <ul class="panel" id="desserts">
+    <li>
+        <div class="item">
+            <span class="name">Тирамису (Tiramisu), Италия</span>
+            <p class="desc">Знаменитый итальянский десерт из печенья савоярди, пропитанного крепким кофе (иногда с добавлением ликёра), и нежного крема на основе сыра маскарпоне, присыпанный какао-порошком.</p>
+        </div>
+        <span class="price">2 200 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Чизкейк «Нью-Йорк» (New York Cheesecake), США</span>
+            <p class="desc">Классический запечённый десерт на коржe из песочной крошки с плотной, но тающей во рту начинкой из сливочного сыра и ванили.</p>
+        </div>
+        <span class="price">2 100 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Макарон (Macaron), Франция</span>
+            <p class="desc">Элегантные французские пирожные из миндальной муки и взбитых белков с хрустящей корочкой и мягкой начинкой (ганаш, джем или крем) самых разных цветов и вкусов.</p>
+        </div>
+        <span class="price">700 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Крем-брюле (Crème Brûlée), Франция</span>
+            <p class="desc">Утончённый заварной сливочный крем с ванилью, главный секрет которого — хрустящая карамельная корочка сверху, которую приятно разбивать ложкой.</p>
+        </div>
+        <span class="price">2 300 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Яблочный штрудель (Apfelstrudel), Австрия</span>
+            <p class="desc">Традиционный венский рулет из очень тонкого вытяжного теста с сочной начинкой из яблок, корицы, изюма и обжаренных сухарей. Обычно подаётся тёплым с шариком ванильного мороженого.</p>
+        </div>
+        <span class="price">2 400 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Павлова (Pavlova), Австралия / Новая Зеландия</span>
+            <p class="desc">Лёгкий десерт-торт из воздушного безе с хрустящей корочкой и мягкой сердцевиной (похожей на маршмеллоу), украшенный взбитыми сливками и свежими ягодами или фруктами.</p>
+        </div>
+        <span class="price">2 500 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Донат / Пончик (Glazed Donut), США</span>
+            <p class="desc">Пышные жареные колечки из дрожжевого теста, покрытые классической сахарной, шоколадной или цветной глазурью. Обязательная часть мировой уличной культуры и кофеен.</p>
+        </div>
+        <span class="price">900 ₸</span>
+    </li>
+</ul>
+        </div>
+
+        <!-- ===== Кухня ===== -->
+        <div class="group" id="kitchen">
+            <div class="sub-tabs">
+                <button class="sub-tab active" data-target="breakfast">Завтраки</button>
+                <button class="sub-tab" data-target="soups">Супы</button>
+                <button class="sub-tab" data-target="pasta">Паста</button>
+            </div>
+
+            <ul class="panel active" id="breakfast">
+    <li>
+        <div class="item">
+            <span class="name">Турецкий завтрак (Kahvaltı), Турция</span>
+            <p class="desc">Целый ритуал и настоящий пир: несколько видов сыра, оливки, свежие огурцы и томаты, мёд с каймаком (густыми сливками), варенье, яйца (менемен или суджуклу юмурта), свежий хлеб и турецкий чай.</p>
+        </div>
+        <span class="price">5 500 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Полный английский завтрак (Full English Breakfast), Великобритания</span>
+            <p class="desc">Сытная классика для продуктивного дня: глазунья, сочные свиные колбаски, поджаренный бекон, печёные фасоль и томаты, грибы, тосты со сливочным маслом и иногда кровяная колбаса (black pudding).</p>
+        </div>
+        <span class="price">4 200 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Шакшука (Shakshuka), Израиль / Ближний Восток</span>
+            <p class="desc">Яйца-пашот, сваренные в густом пряном соусе из спелых томатов, сладкого перца, лука, чеснока и специй (зира и паприка). Подаётся в чугунной сковороде со свежей питой или хрустящим хлебом, чтобы макать в желток.</p>
+        </div>
+        <span class="price">3 200 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Чилакилес (Chilaquiles), Мексика</span>
+            <p class="desc">Кусочки кукурузных тортилий (тотопос), тушёные в острой красной или зелёной сальсе. Сверху яйцо-глазунья, измельчённая курица, крошёный сыр, сметана, авокадо и лук.</p>
+        </div>
+        <span class="price">3 400 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Американские панкейки (American Pancakes), США</span>
+            <p class="desc">Пышные воздушные оладьи высокой стопкой. Их щедро поливают натуральным кленовым сиропом, кладут сверху кусочек тающего сливочного масла и дополняют свежими ягодами или хрустящим беконом.</p>
+        </div>
+        <span class="price">2 800 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Французский континентальный завтрак, Франция</span>
+            <p class="desc">Воплощение изящной простоты: свежеиспечённый хрустящий круассан или багет со сливочным маслом и джемом, чашка чая или кофе с молоком и стакан свежевыжатого апельсинового сока.</p>
+        </div>
+        <span class="price">3 000 ₸</span>
+    </li>
+</ul>
+
+            <ul class="panel" id="soups">
+    <li>
+        <div class="item">
+            <span class="name">Рамен (Ramen), Япония</span>
+            <p class="desc">Наваристый, сытный суп на насыщенном бульоне (свином, курином или рыбном) с пшеничной лапшой, ломтиками сочного тясю (запечённой свинины), маринованным яйцом с мягким желтком, бамбуком и нори.</p>
+        </div>
+        <span class="price">3 600 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Том Ям (Tom Yum), Таиланд</span>
+            <p class="desc">Легендарный тайский кисло-острый суп на курином или креветочном бульоне. Яркий аромат ему придают кокосовое молоко, креветки, грибы, лемонграсс, листья каффир-лайма, галангал и чили-паста.</p>
+        </div>
+        <span class="price">3 900 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Борщ, Украина / Восточная Европа</span>
+            <p class="desc">Насыщенный рубиновый суп на основе свёклы, говяжьего бульона, капусты, картофеля и овощной зажарки. Традиционно подаётся горячим со сметаной, свежей зеленью, чесночными пампушками и салом.</p>
+        </div>
+        <span class="price">2 700 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Фо Бо (Phở Bò), Вьетнам</span>
+            <p class="desc">Ароматный вьетнамский суп с плоской рисовой лапшой и тонко нарезанной говядиной. Бульон варят часами с анисом, корицей и гвоздикой, а при подаче добавляют ростки маша, лайм, свежую кинзу и чили.</p>
+        </div>
+        <span class="price">3 500 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Французский луковый суп (French Onion Soup), Франция</span>
+            <p class="desc">Утончённая классика парижских бистро: лук, карамелизованный до золотисто-коричневого цвета, на насыщенном говяжьем бульоне с сухим белым вином. Подаётся с запечённым гренком под толстой тянущейся корочкой сыра грюйер.</p>
+        </div>
+        <span class="price">3 100 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Гаспачо (Gazpacho), Испания</span>
+            <p class="desc">Знаменитый холодный суп родом из Андалусии. Готовится из измельчённых спелых томатов, свежих огурцов, болгарского перца, чеснока, оливкового масла и винного уксуса. Освежающее блюдо для жаркого летнего дня.</p>
+        </div>
+        <span class="price">2 500 ₸</span>
+    </li>
+</ul>
+
+            <ul class="panel" id="pasta">
+    <li>
+        <div class="item">
+            <span class="name">Спагетти Карбонара (Spaghetti alla Carbonara), Рим</span>
+            <p class="desc">Римская классика без единой капли сливок. Нежный кремовый соус создаётся из эмульсии желтков, выдержанного сыра (пекорино романо или пармезан), обжаренной свиной щёчки (гуанчале или панчетта) и свежемолотого чёрного перца.</p>
+        </div>
+        <span class="price">3 400 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Тальятелле Болоньезе (Tagliatelle al Ragù alla Bolognese), Болонья</span>
+            <p class="desc">Сердце Северной Италии: широкая яичная лапша с густым мясным рагу, которое несколько часов томится с говядиной, свининой, томатами, овощной пассеровкой и давленым чесноком.</p>
+        </div>
+        <span class="price">3 500 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Пенне Арабьята (Penne all'Arrabbiata), Лацио</span>
+            <p class="desc">Для любителей пикантных вкусов. Пенне в ярком томатном соусе с чесноком, оливковым маслом и острым красным перцем чили («arrabbiata» переводится как «сердитая»).</p>
+        </div>
+        <span class="price">2 900 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Паста Песто Алла Дженовезе (Pesto Genovese), Генуя</span>
+            <p class="desc">Ароматная и освежающая паста (пенне или трофие) с ярко-зелёным соусом из свежего базилика, кедровых орешков, чеснока, сыра пармезан (или грана падано) и оливкового масла холодного отжима.</p>
+        </div>
+        <span class="price">3 100 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Фетучини Альфредо (Fettuccine Alfredo), Рим / США</span>
+            <p class="desc">Воплощение нежности: ленты фетучини, обволоченные бархатистым соусом из качественного сливочного масла и тёртого пармезана, который при смешивании с горячей пастой образует гладкую кремовую текстуру.</p>
+        </div>
+        <span class="price">3 300 ₸</span>
+    </li>
+    <li>
+        <div class="item">
+            <span class="name">Спагетти с морепродуктами (Spaghetti ai Frutti di Mare), побережье Италии</span>
+            <p class="desc">Главное блюдо итальянских курортов: спагетти в лёгком соусе из белого вина, чеснока и оливкового масла со свежими морепродуктами: креветками, мидиями, кальмарами и моллюсками вонголе.</p>
+        </div>
+        <span class="price">4 500 ₸</span>
+    </li>
+</ul>
+        </div>
+
+    </main>
+
+    <a href="cart.html" class="cart" aria-label="Корзина">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+    <span class="cart-count" id="cart-count">0</span>
+</a>
+   
+<div class="opt-modal" id="opt-modal">
+    <div class="opt-box">
+        <h3 class="opt-title" id="opt-title"></h3>
+
+        <div class="opt-block" id="opt-size-block">
+            <p class="opt-label">Размер <span>выберите один</span></p>
+            <div class="opt-list" id="opt-sizes"></div>
+        </div>
+
+        <div class="opt-block" id="opt-syrup-block">
+            <p class="opt-label">Сироп <span>можно несколько</span></p>
+            <div class="opt-list" id="opt-syrups"></div>
+        </div>
+
+        <button class="opt-confirm" id="opt-confirm">Выбрать</button>
+    </div>
+</div>
+
+    <script src="menu.js"></script>
+</body>
+</html>

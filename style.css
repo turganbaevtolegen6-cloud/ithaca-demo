@@ -1,0 +1,326 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #3b2a20;
+    background-color: #fffaf4;
+    line-height: 1.6;
+}
+
+/* ---------- Верхняя часть с видео ---------- */
+
+.top {
+    position: relative;
+    overflow: hidden;
+    color: #f5e6d3;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* тёмная плёнка поверх видео, чтобы текст читался */
+.top::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(59, 42, 32, 0.65);
+    z-index: 1;
+}
+
+.top > .header,
+.top > .hero,
+.top > .section {
+    position: relative;
+    z-index: 2;
+}
+
+/* ---------- Шапка ---------- */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 34px;
+    letter-spacing: 2px;
+    color: #f5e6d3;
+    text-decoration: none;
+}
+
+.header nav a {
+    color: #f5e6d3;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.header nav a:hover {
+    color: #d9a066;
+}
+
+/* ---------- Главный экран ---------- */
+
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* ---------- Кнопки ---------- */
+
+.btn {
+    display: inline-block;
+    margin: 20px 5px 0;
+    padding: 12px 28px;
+    background-color: #d9a066;
+    color: #3b2a20;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #c48a4f;
+}
+
+/* ---------- Разделы ---------- */
+
+.section {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.section-menu {
+    max-width: none;
+    background-size: cover;
+    background-position: center;
+}
+
+/* фон первого листа (кофе) */
+.section-menu[data-slide="0"] {
+    background-image: linear-gradient(rgba(245, 230, 211, 0.88), rgba(245, 230, 211, 0.88)),
+                      url("images/menu-bg1.jpg");
+}
+
+/* фон второго листа (круассаны, сэндвичи, пирожные) */
+.section-menu[data-slide="1"] {
+    background-image: linear-gradient(rgba(245, 230, 211, 0.88), rgba(245, 230, 211, 0.88)),
+                      url("images/menu-bg2.jpg");
+}
+
+/* ---------- Меню ---------- */
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.menu-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px dashed #b89b80;
+}
+
+/* ---------- Галерея ---------- */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ---------- Карта ---------- */
+
+.map {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+/* ---------- Подвал ---------- */
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #3b2a20;
+    color: #f5e6d3;
+}
+
+/* ---------- Телефон ---------- */
+
+/* ---------- Слайдер меню ---------- */
+
+.slider {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.slides-window {
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    padding: 0 70px;
+}
+
+/* прозрачные стрелки */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(59, 42, 32, 0.35);
+    background: rgba(59, 42, 32, 0.12);
+    color: #3b2a20;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.arrow:hover {
+    background: rgba(59, 42, 32, 0.35);
+}
+
+.arrow-left {
+    left: 0;
+}
+
+.arrow-right {
+    right: 0;
+}
+
+/* точки под слайдером */
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background: rgba(59, 42, 32, 0.3);
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #3b2a20;
+}
+
+/* ---------- Блок «Меню» на главной ---------- */
+
+.menu-teaser {
+    padding: 100px 20px;
+    text-align: center;
+    background-image: linear-gradient(rgba(59, 42, 32, 0.6), rgba(59, 42, 32, 0.6)),
+                      url("images/menu-bg1.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.menu-link {
+    display: inline-block;
+    font-size: 56px;
+    font-weight: bold;
+    color: #f5e6d3;
+    text-decoration: none;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #d9a066;
+    transition: color 0.3s, letter-spacing 0.3s;
+}
+
+.menu-link::after {
+    content: " →";
+}
+
+.menu-link:hover {
+    color: #d9a066;
+    letter-spacing: 3px;
+}
+
+.footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+     .menu-link {
+        font-size: 40px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+      
+    .slide {
+        padding: 0 50px;
+    }
+
+    .arrow {
+        width: 36px;
+        height: 36px;
+    }
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина — Ithaca</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body class="menu-body">
+
+    <div class="topbar">
+        <a href="index.html" class="logo">Ithaca</a>
+        <a href="menu.html" class="back">← Вернуться в меню</a>
+    </div>
+
+    <main class="cart-wrap">
+        <h1 class="cart-title">Корзина</h1>
+
+        <ul class="cart-list" id="cart-list"></ul>
+
+        <p class="cart-empty" id="cart-empty">
+            Корзина пока пуста. <a href="menu.html">Перейти в меню</a>
+        </p>
+    </main>
+
+    <!-- Закреплённая нижняя панель -->
+    <div class="checkout-bar">
+        <div class="total">Сумма: <span id="total">0 ₸</span></div>
+        <button class="checkout-btn" id="checkout">Оформить заказ</button>
+    </div>
+
+    <!-- Окно поверх страницы -->
+    <!-- Окно оформления заказа -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+
+        <div class="modal-head">
+            <h2>Оформление заказа</h2>
+            <button class="modal-x" id="modal-x" aria-label="Закрыть">&times;</button>
+        </div>
+
+        <div class="modal-body">
+
+            <!-- Способ получения -->
+            <div class="mode-switch">
+                <label class="mode">
+                    <input type="radio" name="mode" value="delivery">
+                    <span>Доставка</span>
+                </label>
+                <label class="mode">
+                    <input type="radio" name="mode" value="pickup">
+                    <span>Самовывоз</span>
+                </label>
+            </div>
+
+            <!-- Самовывоз -->
+            <div class="pickup-note" id="pickup-block">
+                Заказ можно забрать в кофейне Ithaca по адресу: ул. Примерная, 10.
+            </div>
+
+            <!-- Доставка -->
+            <div class="delivery" id="delivery-block">
+                <p class="city-label">г. Алматы</p>
+
+                <div class="field">
+                    <label for="f-street">Улица</label>
+                    <input id="f-street" type="text" autocomplete="off" placeholder="Начните вводить улицу">
+                    <ul class="suggest" id="suggest"></ul>
+                </div>
+
+                <div class="field">
+                    <label for="f-house">Дом</label>
+                    <input id="f-house" type="text" autocomplete="off">
+                </div>
+
+                <button type="button" class="map-btn" id="map-open">Выбрать по карте</button>
+
+                <!-- Появляется, когда улица и дом заполнены -->
+                <div class="more" id="more-fields">
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="f-entrance">Подъезд</label>
+                            <input id="f-entrance" type="text" autocomplete="off">
+                        </div>
+                        <div class="field">
+                            <label for="f-flat">Квартира</label>
+                            <input id="f-flat" type="text" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="notice" id="delivery-notice"></div>
+                </div>
+            </div>
+        
+                        <!-- Контакты клиента -->
+            <div class="contacts">
+                <p class="contacts-title">Ваши контакты</p>
+
+                <div class="field">
+                    <label for="f-name">Имя</label>
+                    <input id="f-name" type="text" autocomplete="name">
+                </div>
+
+                <div class="field">
+                    <label for="f-phone">Телефон</label>
+                    <input id="f-phone" type="tel" autocomplete="tel" placeholder="+7 700 000 00 00">
+                </div>
+
+                <div class="field">
+                    <label for="f-comment">Комментарий к заказу</label>
+                    <textarea id="f-comment" rows="2" placeholder="Например: позвоните за 5 минут"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="form-msg" id="form-msg"></p>
+
+        <div class="modal-foot">
+            <div class="modal-sum">Сумма заказа <span id="modal-total">0 ₸</span></div>
+            <button class="pay-btn" id="pay-btn">Отправить заказ</button>
+        </div>
+
+        <div class="done" id="done">
+            <h2>Почти готово</h2>
+            <p>Мы открыли WhatsApp с готовым сообщением. Нажмите там «Отправить», чтобы заказ ушёл в кофейню.</p>
+            <a href="menu.html" class="done-link">Вернуться в меню</a>
+        </div>         
+
+    </div>
+</div>
+
+<!-- Карта выбора здания -->
+<div class="map-modal" id="map-modal">
+    <div class="map-box">
+        <div class="map-top">
+            <span>Выберите здание на карте</span>
+            <button class="modal-x" id="map-close" aria-label="Закрыть карту">&times;</button>
+        </div>
+
+        <div class="map-canvas" id="map"></div>
+
+        <button type="button" class="geo-btn" id="geo-btn">Моё местоположение</button>
+
+        <div class="map-bottom">
+            <p class="map-address" id="map-address">Нажмите на здание на карте</p>
+            <button class="map-confirm" id="map-confirm" disabled>Выбрать этот адрес</button>
+        </div>
+    </div>
+</div>
+
+    <script src="cart.js"></script>
+</body>
+</html>
