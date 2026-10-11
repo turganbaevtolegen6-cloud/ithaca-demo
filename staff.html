@@ -37,9 +37,11 @@
             </div>
         </header>
 
-        <nav class="tabs">
+                <nav class="tabs">
             <button class="tab active" data-view="orders-view">Заказы</button>
             <button class="tab" data-view="stop-view">Стоп-лист</button>
+            <button class="tab" data-view="menu-view">Меню</button>
+            <button class="tab" data-view="hours-view">Часы</button>
         </nav>
 
         <!-- Заказы -->
@@ -55,9 +57,49 @@
             <p class="msg" id="stop-msg"></p>
             <div id="stoplist"></div>
         </div>
+        
+                <!-- Меню -->
+        <div id="menu-view" class="hidden">
+            <p class="hint">Меняйте названия, описания и цены, добавляйте и удаляйте блюда. Изменения попадут на сайт после нажатия «Сохранить меню».</p>
+            <p class="msg" id="menu-msg"></p>
+
+            <div id="menu-import" class="hidden">
+                <p>Меню в базе пока пусто. Нажмите кнопку, чтобы загрузить текущее меню из файла menu.html.</p>
+                <button class="save-btn" id="menu-import-btn">Загрузить меню из menu.html</button>
+            </div>
+
+            <div id="menu-editor" class="hidden">
+                <div class="menu-savebar">
+                    <button class="save-btn" id="menu-save">Сохранить меню</button>
+                    <p class="msg" id="menu-status"></p>
+                </div>
+                <div id="menu-list"></div>
+            </div>
+        </div>
+
+        <!-- Часы работы -->
+        <div id="hours-view" class="hidden">
+            <p class="hint">Вне этих часов сайт сам перестанет принимать заказы. Время указывается по Алматы.</p>
+
+            <label class="check">
+                <input type="checkbox" id="h-enabled">
+                Закрывать приём заказов автоматически вне часов работы
+            </label>
+
+            <div class="hours-row">
+                <label>Открытие <input type="time" id="h-open" value="08:00"></label>
+                <label>Закрытие <input type="time" id="h-close" value="22:00"></label>
+            </div>
+
+            <button class="save-btn" id="h-save">Сохранить</button>
+            <p class="msg ok" id="h-msg"></p>
+        </div>
+
     </section>
 
     <script type="module" src="staff.js"></script>
        <script type="module" src="staff-accept.js"></script>
+           <script type="module" src="staff-hours.js"></script>
+        <script type="module" src="staff-menu.js"></script>
 </body>
 </html>

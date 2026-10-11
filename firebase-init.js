@@ -15,3 +15,7 @@ const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+// ключ блюда для хранения цен в базе (без символов, которые Firestore не любит)
+export function priceKey(name) {
+    return name.replace(/[.\/\[\]*`~]/g, '_');
+}

@@ -519,3 +519,9 @@
 body.orders-closed .closed-banner {
     display: block;
 }
+
+.menu-loading {
+    padding: 40px 0;
+    text-align: center;
+    color: #6b8a58;
+}

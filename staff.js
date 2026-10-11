@@ -8,6 +8,7 @@ import {
     collection, query, orderBy, limit, onSnapshot, doc, updateDoc,
     setDoc, arrayUnion, arrayRemove
 } from 'https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js';
+import { MENU_REF } from './menu-store.js';
 
 const loginBox = document.getElementById('login');
 const panel = document.getElementById('panel');
@@ -79,11 +80,11 @@ document.querySelectorAll('.tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
         document.querySelectorAll('.tab').forEach(function (t) {
             t.classList.remove('active');
+
+            const view = document.getElementById(t.dataset.view);
+            if (view) view.classList.toggle('hidden', t !== tab);
         });
         tab.classList.add('active');
-
-        document.getElementById('orders-view').classList.toggle('hidden', tab.dataset.view !== 'orders-view');
-        document.getElementById('stop-view').classList.toggle('hidden', tab.dataset.view !== 'stop-view');
     });
 });
 
@@ -210,60 +211,53 @@ function beep() {
 
 // ---------- Стоп-лист ----------
 
-// список блюд берём прямо из menu.html, чтобы не дублировать меню
-async function loadMenuStructure() {
-    const response = await fetch('menu.html');
-    const html = await response.text();
-    const page = new DOMParser().parseFromString(html, 'text/html');
-    const result = [];
+// ---------- Стоп-лист ----------
 
-    page.querySelectorAll('.group').forEach(function (group) {
-        const mainTab = page.querySelector('.main-tab[data-group="' + group.id + '"]');
-        const section = {
-            title: mainTab ? mainTab.textContent.trim() : group.id,
-            blocks: []
+function menuToStructure(menu) {
+    return menu.groups.map(function (group) {
+        return {
+            title: group.title,
+            blocks: group.tabs.map(function (tab) {
+                return {
+                    title: tab.title,
+                    names: tab.items.map(function (item) { return item.name; })
+                };
+            })
         };
-
-        group.querySelectorAll('.panel').forEach(function (panelEl) {
-            const subTab = page.querySelector('.sub-tab[data-target="' + panelEl.id + '"]');
-            const names = [];
-
-            panelEl.querySelectorAll('li:not(.head) .name').forEach(function (n) {
-                names.push(n.textContent.trim());
-            });
-
-            section.blocks.push({
-                title: subTab ? subTab.textContent.trim() : panelEl.id,
-                names: names
-            });
-        });
-
-        result.push(section);
     });
-
-    return result;
 }
 
-async function startStoplist() {
+function startStoplist() {
     stopMsg.textContent = '';
 
-    try {
-        if (!menuStructure) menuStructure = await loadMenuStructure();
-    } catch (e) {
-        stopMsg.textContent = 'Не удалось загрузить блюда из menu.html. Откройте страницу через Live Server или с сайта.';
-        return;
-    }
+    const offMenu = onSnapshot(MENU_REF, function (snap) {
+        const menu = snap.exists() ? snap.data().menu : null;
+        menuStructure = menu ? menuToStructure(menu) : [];
+        renderStoplist();
+    }, function () {
+        stopMsg.textContent = 'Нет доступа к меню. Проверьте правила в Firebase.';
+    });
 
-    unsubscribeStop = onSnapshot(STOP_REF, function (snap) {
+    const offStop = onSnapshot(STOP_REF, function (snap) {
         stopNames = snap.exists() ? (snap.data().items || []) : [];
         renderStoplist();
     }, function () {
         stopMsg.textContent = 'Нет доступа к стоп-листу. Проверьте правила в Firebase.';
     });
+
+    unsubscribeStop = function () {
+        offMenu();
+        offStop();
+    };
 }
 
 function renderStoplist() {
     stopEl.innerHTML = '';
+
+    if (!menuStructure || menuStructure.length === 0) {
+        stopEl.appendChild(el('p', 'hint', 'Меню пока не загружено. Перенесите его на вкладке «Меню».'));
+        return;
+    }
 
     menuStructure.forEach(function (section) {
         const wrap = el('div', 'stop-section');

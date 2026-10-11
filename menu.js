@@ -1,32 +1,35 @@
-const mainTabs = document.querySelectorAll('.main-tab');
-const groups = document.querySelectorAll('.group');
+// ---------- Вкладки меню ----------
 
-// главные вкладки: Напитки / Снэки / Кухня
-mainTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-        mainTabs.forEach(function (t) { t.classList.remove('active'); });
-        groups.forEach(function (g) { g.classList.remove('active'); });
+function initTabs() {
+    const mainTabs = document.querySelectorAll('.main-tab');
+    const groups = document.querySelectorAll('.group');
 
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.group).classList.add('active');
-    });
-});
+    mainTabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            mainTabs.forEach(function (t) { t.classList.remove('active'); });
+            groups.forEach(function (g) { g.classList.remove('active'); });
 
-// подвкладки внутри каждой группы
-groups.forEach(function (group) {
-    const subTabs = group.querySelectorAll('.sub-tab');
-    const panels = group.querySelectorAll('.panel');
-
-    subTabs.forEach(function (subTab) {
-        subTab.addEventListener('click', function () {
-            subTabs.forEach(function (s) { s.classList.remove('active'); });
-            panels.forEach(function (p) { p.classList.remove('active'); });
-
-            subTab.classList.add('active');
-            document.getElementById(subTab.dataset.target).classList.add('active');
+            tab.classList.add('active');
+            document.getElementById(tab.dataset.group).classList.add('active');
         });
     });
-});
+
+    groups.forEach(function (group) {
+        const subTabs = group.querySelectorAll('.sub-tab');
+        const panels = group.querySelectorAll('.panel');
+
+        subTabs.forEach(function (subTab) {
+            subTab.addEventListener('click', function () {
+                subTabs.forEach(function (s) { s.classList.remove('active'); });
+                panels.forEach(function (p) { p.classList.remove('active'); });
+
+                subTab.classList.add('active');
+                document.getElementById(subTab.dataset.target).classList.add('active');
+            });
+        });
+    });
+}
+
 // ---------- Корзина ----------
 
 const CART_KEY = 'ithaca_cart';
@@ -193,7 +196,6 @@ optConfirm.addEventListener('click', function () {
     closeOptions();
 });
 
-// закрыть без выбора: клик по тёмному фону или Esc
 optModal.addEventListener('click', function (e) {
     if (e.target === optModal) closeOptions();
 });
@@ -204,30 +206,42 @@ document.addEventListener('keydown', function (e) {
 
 // ---------- Значки корзины в позициях меню ----------
 
-document.querySelectorAll('.panel li:not(.head)').forEach(function (li) {
-    const data = getItemData(li);
-    const isCoffee = li.parentElement.id === 'coffee';
-    const needsOptions = data.sizes.length > 1 || isCoffee;
+function initAddButtons() {
+    document.querySelectorAll('.panel li:not(.head)').forEach(function (li) {
+        const data = getItemData(li);
+        const isCoffee = li.parentElement.id === 'coffee';
+        const needsOptions = data.sizes.length > 1 || isCoffee;
 
-    const btn = document.createElement('button');
-    btn.className = 'add-btn';
-    btn.dataset.id = data.id;
-    btn.setAttribute('aria-label', 'Добавить в корзину');
-    btn.innerHTML = cartIcon;
+        const btn = document.createElement('button');
+        btn.className = 'add-btn';
+        btn.dataset.id = data.id;
+        btn.setAttribute('aria-label', 'Добавить в корзину');
+        btn.innerHTML = cartIcon;
+
         if (needsOptions) btn.dataset.repeat = '1';
 
-    btn.addEventListener('click', function () {
-        if (needsOptions) {
-            openOptions(data, isCoffee);
-        } else {
-            addToCart(data);
-        }
+        btn.addEventListener('click', function () {
+            const current = getItemData(li);
+
+            if (needsOptions) {
+                openOptions(current, isCoffee);
+            } else {
+                addToCart(current);
+            }
+        });
+
+        li.appendChild(btn);
     });
+}
 
-    li.appendChild(btn);
-});
+// запускается после того, как меню нарисовано (из menu-render.js)
+window.initMenu = function () {
+    initTabs();
+    initAddButtons();
+    syncCart();
+};
 
-syncCart();
+updateCount();
 
 // когда возвращаешься со страницы корзины, состояние обновляется
 window.addEventListener('pageshow', syncCart);
