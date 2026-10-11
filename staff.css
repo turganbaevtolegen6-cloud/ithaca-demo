@@ -1,0 +1,213 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #2f3d2a;
+    background-color: #e3efd0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #3f5d34;
+}
+
+/* ---------- Вход ---------- */
+
+.login {
+    max-width: 340px;
+    margin: 12vh auto 0;
+    padding: 28px 24px;
+    text-align: center;
+    background: #f4f9ea;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(47, 61, 42, 0.15);
+}
+
+.login h1 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.login input {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: 15px;
+    border: 1px solid #9bb67f;
+    border-radius: 8px;
+}
+
+.login button {
+    width: 100%;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: #4c6b3c;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.msg {
+    min-height: 18px;
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: #b5532f;
+}
+
+/* ---------- Панель ---------- */
+
+.panel {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 16px 16px 60px;
+}
+
+.panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.panel-head h1 {
+    margin: 10px 0;
+    font-size: 30px;
+}
+
+.who {
+    margin-right: 10px;
+    font-size: 13px;
+    color: #6b8a58;
+}
+
+.logout {
+    padding: 7px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #4c6b3c;
+    background: transparent;
+    border: 2px solid #4c6b3c;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.empty {
+    padding: 30px 0;
+    text-align: center;
+    color: #6b8a58;
+}
+
+/* ---------- Карточка заказа ---------- */
+
+.order {
+    margin-bottom: 14px;
+    padding: 16px 18px;
+    background: #f4f9ea;
+    border-left: 6px solid #b5532f;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(47, 61, 42, 0.1);
+}
+
+.order.st-cooking { border-left-color: #e0a030; }
+.order.st-ready   { border-left-color: #4c9a5a; }
+.order.st-done    { border-left-color: #9bb67f; opacity: 0.6; }
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    color: #6b8a58;
+}
+
+.badge {
+    padding: 2px 10px;
+    font-weight: 600;
+    color: #fff;
+    background: #4c6b3c;
+    border-radius: 999px;
+}
+
+.order-client {
+    margin: 10px 0 4px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.order-client a {
+    color: #b5532f;
+    text-decoration: none;
+}
+
+.order-address,
+.order-comment {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.order-comment {
+    color: #6b8a58;
+    font-style: italic;
+}
+
+.order-items {
+    margin: 10px 0;
+    padding: 10px 0;
+    list-style: none;
+    border-top: 1px dashed #9bb67f;
+    border-bottom: 1px dashed #9bb67f;
+}
+
+.order-items li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 3px 0;
+    font-size: 14px;
+}
+
+.order-total {
+    margin: 0 0 12px;
+    text-align: right;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #b5532f;
+}
+
+.statuses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.status-btn {
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4c6b3c;
+    background: transparent;
+    border: 2px solid #4c6b3c;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.status-btn.active {
+    color: #fff;
+    background: #4c6b3c;
+}

@@ -631,6 +631,38 @@ function buildOrderText(mode) {
     return lines.join('\n');
 }
 
+function buildAddress() {
+    let address = 'г. Алматы, ' + streetInput.value.trim() + ', дом ' + houseInput.value.trim();
+    if (entranceInput.value.trim()) address += ', подъезд ' + entranceInput.value.trim();
+    if (flatInput.value.trim()) address += ', кв. ' + flatInput.value.trim();
+    return address;
+}
+
+// данные заказа для базы
+function buildOrderData(mode) {
+    const fee = mode === 'delivery' ? DELIVERY_PRICE : 0;
+
+    return {
+        mode: mode,
+        items: cart.map(function (item) {
+            const size = item.sizes[item.size];
+            return {
+                name: item.name,
+                size: size && size.label ? size.label : '',
+                syrups: item.syrups || [],
+                qty: item.qty,
+                sum: itemSum(item)
+            };
+        }),
+        deliveryFee: fee,
+        total: orderTotal() + fee,
+        name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        address: mode === 'delivery' ? buildAddress() : '',
+        comment: commentInput.value.trim()
+    };
+}
+
 payBtn.addEventListener('click', function () {
     const mode = currentMode();
 
@@ -654,6 +686,13 @@ payBtn.addEventListener('click', function () {
         formMsg.textContent = 'Укажите телефон, чтобы мы могли связаться.';
         phoneInput.focus();
         return;
+    }
+
+    // запись в базу для персонала (WhatsApp остаётся запасным каналом)
+    if (window.saveOrder) {
+        window.saveOrder(buildOrderData(mode)).catch(function (e) {
+            console.error('Заказ не записан в базу:', e);
+        });
     }
 
     const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(buildOrderText(mode));

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Заказы</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="staff.css">
+</head>
+<body>
+
+    <!-- Вход -->
+    <section class="login" id="login">
+        <h1>Вход для персонала</h1>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Почта" autocomplete="username" required>
+            <input type="password" id="password" placeholder="Пароль" autocomplete="current-password" required>
+            <button type="submit">Войти</button>
+        </form>
+        <p class="msg" id="login-msg"></p>
+    </section>
+
+    <!-- Заказы -->
+    <section class="panel hidden" id="panel">
+        <header class="panel-head">
+            <h1>Заказы</h1>
+            <div>
+                <span class="who" id="who"></span>
+                <button class="logout" id="logout">Выйти</button>
+            </div>
+        </header>
+
+        <p class="msg" id="panel-msg"></p>
+        <p class="empty hidden" id="empty">Заказов пока нет.</p>
+
+        <div class="orders" id="orders"></div>
+    </section>
+
+    <script type="module" src="staff.js"></script>
+</body>
+</html>
