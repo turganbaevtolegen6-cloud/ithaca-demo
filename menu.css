@@ -429,6 +429,40 @@
     background-color: #3f5d34;
 }
 
+/* ---------- Блюдо закончилось ---------- */
+
+.panel li.sold-out .name {
+    color: #6b8a58;
+    text-decoration: line-through;
+}
+
+.panel li.sold-out .name::after {
+    content: 'Закончилось';
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    background: #b5532f;
+    border-radius: 999px;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.panel li.sold-out .desc,
+.panel li.sold-out .price {
+    opacity: 0.45;
+}
+
+.add-btn:disabled,
+.add-btn:disabled:hover {
+    color: #4c6b3c;
+    background-color: rgba(76, 107, 60, 0.12);
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
 @media (max-width: 600px) {
           .panel .desc {
         font-size: 12px;

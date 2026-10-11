@@ -5,7 +5,8 @@ import {
     signOut
 } from 'https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js';
 import {
-    collection, query, orderBy, limit, onSnapshot, doc, updateDoc
+    collection, query, orderBy, limit, onSnapshot, doc, updateDoc,
+    setDoc, arrayUnion, arrayRemove
 } from 'https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js';
 
 const loginBox = document.getElementById('login');
@@ -14,6 +15,10 @@ const loginMsg = document.getElementById('login-msg');
 const panelMsg = document.getElementById('panel-msg');
 const ordersEl = document.getElementById('orders');
 const emptyEl = document.getElementById('empty');
+const stopEl = document.getElementById('stoplist');
+const stopMsg = document.getElementById('stop-msg');
+
+const STOP_REF = doc(db, 'settings', 'stoplist');
 
 const STATUSES = [
     ['new', 'Новый'],
@@ -23,7 +28,10 @@ const STATUSES = [
 ];
 
 let unsubscribe = null;
+let unsubscribeStop = null;
 let firstLoad = true;
+let menuStructure = null;
+let stopNames = [];
 
 // ---------- Вход и выход ----------
 
@@ -50,14 +58,33 @@ onAuthStateChanged(auth, function (user) {
         panel.classList.remove('hidden');
         document.getElementById('who').textContent = user.email;
         startListening();
+        startStoplist();
     } else {
         if (unsubscribe) {
             unsubscribe();
             unsubscribe = null;
         }
+        if (unsubscribeStop) {
+            unsubscribeStop();
+            unsubscribeStop = null;
+        }
         panel.classList.add('hidden');
         loginBox.classList.remove('hidden');
     }
+});
+
+// ---------- Вкладки «Заказы» и «Стоп-лист» ----------
+
+document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+        document.querySelectorAll('.tab').forEach(function (t) {
+            t.classList.remove('active');
+        });
+        tab.classList.add('active');
+
+        document.getElementById('orders-view').classList.toggle('hidden', tab.dataset.view !== 'orders-view');
+        document.getElementById('stop-view').classList.toggle('hidden', tab.dataset.view !== 'stop-view');
+    });
 });
 
 // ---------- Заказы в реальном времени ----------
@@ -94,7 +121,7 @@ function render(docs) {
         ordersEl.appendChild(orderCard(d.id, order));
     });
 
-    document.title = (fresh ? '(' + fresh + ') ' : '') + 'Заказы';
+    document.title = (fresh ? '(' + fresh + ') ' : '') + 'Кухня';
 }
 
 // ---------- Карточка заказа (текст вставляем безопасно через textContent) ----------
@@ -179,4 +206,93 @@ function beep() {
             ctx.close();
         }, 300);
     } catch (e) {}
+}
+
+// ---------- Стоп-лист ----------
+
+// список блюд берём прямо из menu.html, чтобы не дублировать меню
+async function loadMenuStructure() {
+    const response = await fetch('menu.html');
+    const html = await response.text();
+    const page = new DOMParser().parseFromString(html, 'text/html');
+    const result = [];
+
+    page.querySelectorAll('.group').forEach(function (group) {
+        const mainTab = page.querySelector('.main-tab[data-group="' + group.id + '"]');
+        const section = {
+            title: mainTab ? mainTab.textContent.trim() : group.id,
+            blocks: []
+        };
+
+        group.querySelectorAll('.panel').forEach(function (panelEl) {
+            const subTab = page.querySelector('.sub-tab[data-target="' + panelEl.id + '"]');
+            const names = [];
+
+            panelEl.querySelectorAll('li:not(.head) .name').forEach(function (n) {
+                names.push(n.textContent.trim());
+            });
+
+            section.blocks.push({
+                title: subTab ? subTab.textContent.trim() : panelEl.id,
+                names: names
+            });
+        });
+
+        result.push(section);
+    });
+
+    return result;
+}
+
+async function startStoplist() {
+    stopMsg.textContent = '';
+
+    try {
+        if (!menuStructure) menuStructure = await loadMenuStructure();
+    } catch (e) {
+        stopMsg.textContent = 'Не удалось загрузить блюда из menu.html. Откройте страницу через Live Server или с сайта.';
+        return;
+    }
+
+    unsubscribeStop = onSnapshot(STOP_REF, function (snap) {
+        stopNames = snap.exists() ? (snap.data().items || []) : [];
+        renderStoplist();
+    }, function () {
+        stopMsg.textContent = 'Нет доступа к стоп-листу. Проверьте правила в Firebase.';
+    });
+}
+
+function renderStoplist() {
+    stopEl.innerHTML = '';
+
+    menuStructure.forEach(function (section) {
+        const wrap = el('div', 'stop-section');
+        wrap.appendChild(el('h2', '', section.title));
+
+        section.blocks.forEach(function (block) {
+            wrap.appendChild(el('h3', '', block.title));
+
+            const items = el('div', 'stop-items');
+
+            block.names.forEach(function (name) {
+                const off = stopNames.indexOf(name) !== -1;
+
+                const btn = el('button', 'stop-item' + (off ? ' off' : ''));
+                btn.appendChild(el('span', 'name', name));
+                btn.appendChild(el('span', 'state', off ? 'Закончилось' : 'В наличии'));
+
+                btn.addEventListener('click', function () {
+                    setDoc(STOP_REF, {
+                        items: off ? arrayRemove(name) : arrayUnion(name)
+                    }, { merge: true });
+                });
+
+                items.appendChild(btn);
+            });
+
+            wrap.appendChild(items);
+        });
+
+        stopEl.appendChild(wrap);
+    });
 }

@@ -211,3 +211,99 @@ h1 {
     color: #fff;
     background: #4c6b3c;
 }
+
+/* ---------- Вкладки ---------- */
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin: 6px 0 16px;
+}
+
+.tab {
+    flex: 1;
+    padding: 11px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: #4c6b3c;
+    background: transparent;
+    border: 2px solid #4c6b3c;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.tab.active {
+    color: #fff;
+    background: #4c6b3c;
+}
+
+/* ---------- Стоп-лист ---------- */
+
+.hint {
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: #6b8a58;
+}
+
+.stop-section h2 {
+    margin: 24px 0 4px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #3f5d34;
+}
+
+.stop-section h3 {
+    margin: 14px 0 8px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #6b8a58;
+}
+
+.stop-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stop-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 11px 14px;
+    text-align: left;
+    font-family: inherit;
+    font-size: 14px;
+    color: #2f3d2a;
+    background: #f4f9ea;
+    border: 1px solid #9bb67f;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.stop-item .state {
+    flex-shrink: 0;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: #4c9a5a;
+    border-radius: 999px;
+}
+
+.stop-item.off {
+    background: #f3e1d8;
+    border-color: #b5532f;
+}
+
+.stop-item.off .name {
+    color: #6b8a58;
+    text-decoration: line-through;
+}
+
+.stop-item.off .state {
+    background: #b5532f;
+}

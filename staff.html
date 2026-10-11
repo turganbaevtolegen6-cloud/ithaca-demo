@@ -26,19 +26,34 @@
     </section>
 
     <!-- Заказы -->
+    <!-- Панель -->
     <section class="panel hidden" id="panel">
         <header class="panel-head">
-            <h1>Заказы</h1>
+            <h1>Кухня</h1>
             <div>
                 <span class="who" id="who"></span>
                 <button class="logout" id="logout">Выйти</button>
             </div>
         </header>
 
-        <p class="msg" id="panel-msg"></p>
-        <p class="empty hidden" id="empty">Заказов пока нет.</p>
+        <nav class="tabs">
+            <button class="tab active" data-view="orders-view">Заказы</button>
+            <button class="tab" data-view="stop-view">Стоп-лист</button>
+        </nav>
 
-        <div class="orders" id="orders"></div>
+        <!-- Заказы -->
+        <div id="orders-view">
+            <p class="msg" id="panel-msg"></p>
+            <p class="empty hidden" id="empty">Заказов пока нет.</p>
+            <div class="orders" id="orders"></div>
+        </div>
+
+        <!-- Стоп-лист -->
+        <div id="stop-view" class="hidden">
+            <p class="hint">Нажмите на блюдо, которое закончилось. Повторное нажатие вернёт его в меню.</p>
+            <p class="msg" id="stop-msg"></p>
+            <div id="stoplist"></div>
+        </div>
     </section>
 
     <script type="module" src="staff.js"></script>
