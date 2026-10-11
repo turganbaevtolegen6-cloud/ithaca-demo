@@ -20,3 +20,9 @@ onSnapshot(doc(db, 'settings', 'stoplist'), function (snap) {
 }, function () {
     // если база недоступна, меню просто работает как обычно
 });
+
+// полоса «заказы не принимаются»
+onSnapshot(doc(db, 'settings', 'orders'), function (snap) {
+    const open = snap.exists() ? snap.data().open !== false : true;
+    document.body.classList.toggle('orders-closed', !open);
+}, function () {});

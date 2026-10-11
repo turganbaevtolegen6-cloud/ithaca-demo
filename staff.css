@@ -307,3 +307,22 @@ h1 {
 .stop-item.off .state {
     background: #b5532f;
 }
+
+/* ---------- Кнопка приёма заказов ---------- */
+
+.accept {
+    margin-right: 10px;
+    padding: 7px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #4c9a5a;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.accept.off {
+    background: #b5532f;
+}

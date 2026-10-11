@@ -566,6 +566,12 @@ function closeModal() {
 }
 
 checkoutBtn.addEventListener('click', function () {
+    // если заказы не принимаются, окно не открываем
+    if (window.ordersOpen === false) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+
     refreshCheckout();
     modal.classList.add('open');
 });
@@ -664,6 +670,12 @@ function buildOrderData(mode) {
 }
 
 payBtn.addEventListener('click', function () {
+    // если за время заполнения приём закрыли
+    if (window.ordersOpen === false) {
+        formMsg.textContent = 'Сейчас заказы не принимаются. Попробуйте позже.';
+        return;
+    }
+
     const mode = currentMode();
 
     if (!mode) {

@@ -500,3 +500,22 @@
         font-size: 18px;
     }
 }
+
+/* ---------- Заказы не принимаются ---------- */
+
+.closed-banner {
+    display: none;
+    max-width: 600px;
+    margin: 0 auto 16px;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #b5532f;
+    border-radius: 10px;
+}
+
+body.orders-closed .closed-banner {
+    display: block;
+}

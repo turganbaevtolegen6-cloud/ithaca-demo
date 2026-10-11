@@ -693,3 +693,9 @@
 .modal-box.sent .done {
     display: block;
 }
+
+body.orders-closed .checkout-btn,
+body.orders-closed .pay-btn {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
